@@ -163,4 +163,4 @@ class UIModifications {
   }
 }
 
-UIModifications.addAdditionalRatesToGoal();
+window.addEventListener("load", () => UIModifications.addAdditionalRatesToGoal());
