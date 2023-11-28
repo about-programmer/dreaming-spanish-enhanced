@@ -144,7 +144,7 @@ class UIModifications {
       progress.appendChild(document.createElement('br'));
       progress.appendChild(document.createTextNode(`You'll reach this level in ${goalPerDisplayedMonth[index]} days (${this.#calculateDayForGoal(goalPerDisplayedMonth[index])}) based on your ${Activity.getCalendarTitle().join(' ')} average.`))
       progress.appendChild(document.createElement('br'));
-      progress.appendChild(document.createTextNode(`You'll reach this level in ${goalPerDaysPracticed[index]} (${this.#calculateDayForGoal(goalPerDaysPracticed[index])}) days based on your average for all days practiced.`))
+      progress.appendChild(document.createTextNode(`You'll reach this level in ${goalPerDaysPracticed[index]} days (${this.#calculateDayForGoal(goalPerDaysPracticed[index])}) based on your average for all days practiced.`))
     });
   }
 
@@ -163,7 +163,7 @@ class UIModifications {
   }
 }
 
-// Chromium-based browsers require the event listener. Others do not appear to.
+
 if (!!window.chrome) {
   window.addEventListener("load", () => UIModifications.addAdditionalRatesToGoal());
 } else {
