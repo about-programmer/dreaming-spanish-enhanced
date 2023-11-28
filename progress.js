@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Dreaming Spanish Enhanced
 // @namespace    https://www.dreamingspanish.com
-// @version      0.1
+// @version      0.2
 // @description  adds additional info to Dreaming Spanish progress page
 // @author       https://github.com/about-programmer
 // @match        https://www.dreamingspanish.com/progress
@@ -148,6 +148,19 @@ class UIModifications {
     });
   }
 
+  static modifyGoalBasedOnMonth() {
+    const currentHours = Progression.getTotalInputTime();
+    const inputForLevel = Levels.getHoursRequiredPerLevel();
+    const goalProgress = Levels.getProgressTowardGoal();
+
+    const goalPerDisplayedMonth = UIModifications.#calculateGoalBasedOnDisplayedMonth(currentHours, inputForLevel);
+    goalProgress.forEach((progress, index) => {
+      const goalLines = progress.innerHTML.split('<br>');
+      goalLines[1] = `You'll reach this level in ${goalPerDisplayedMonth[index]} days (${this.#calculateDayForGoal(goalPerDisplayedMonth[index])}) based on your ${Activity.getCalendarTitle().join(' ')} average.`;
+      progress.innerHTML = goalLines.join('<br>');
+    });
+  }
+
   static #calculateDayForGoal(days) {
     return new Date().addDays(days).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
   }
@@ -163,9 +176,33 @@ class UIModifications {
   }
 }
 
+class Main {
+  static #instance;
 
-if (!!window.chrome) {
-  window.addEventListener("load", () => UIModifications.addAdditionalRatesToGoal());
-} else {
-  UIModifications.addAdditionalRatesToGoal()
+  constructor() {
+    if (Main.#instance) {
+      throw new Error('Singleton class cannot be instantiated more than once.');
+    }
+    Main.#instance = this;
+  }
+
+  static init() {
+    if (!!window.chrome) {
+      window.addEventListener("load", () => UIModifications.addAdditionalRatesToGoal());
+    } else {
+      UIModifications.addAdditionalRatesToGoal()
+    }
+  }
+
+  static addClickEventToCalendar() {
+    Array.from(document.getElementsByClassName('ds-form-calendar__arrow')).forEach(arrow => {
+      arrow.addEventListener('click', async () => {
+        await new Promise(r => setTimeout(r, 500)); // wait to make sure Calendar is fully loaded first
+        UIModifications.modifyGoalBasedOnMonth();
+      });
+    });
+  }
 }
+
+Main.init();
+Main.addClickEventToCalendar();
