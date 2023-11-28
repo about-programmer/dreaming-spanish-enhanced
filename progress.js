@@ -163,4 +163,9 @@ class UIModifications {
   }
 }
 
-window.addEventListener("load", () => UIModifications.addAdditionalRatesToGoal());
+// Chromium-based browsers require the event listener. Others do not appear to.
+if (!!window.chrome) {
+  window.addEventListener("load", () => UIModifications.addAdditionalRatesToGoal());
+} else {
+  UIModifications.addAdditionalRatesToGoal()
+}
