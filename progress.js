@@ -139,7 +139,7 @@ class UIModifications {
     goalProgress.forEach((progress, index) => {
       const currentGoalRateHtml = progress.innerHTML;
       const currentDaysUntilGoal = currentGoalRateHtml.split('this level in ')[1].match(/\d+/)[0];
-      const newTextForDailyGoal = currentGoalRateHtml.replace('days based', `days (${this.#calculateDayForGoal(currentDaysUntilGoal)}) based)`)
+      const newTextForDailyGoal = currentGoalRateHtml.replace('days based', `days (${this.#calculateDayForGoal(currentDaysUntilGoal)}) based`)
       progress.innerHTML = newTextForDailyGoal;
       progress.appendChild(document.createElement('br'));
       progress.appendChild(document.createTextNode(`You'll reach this level in ${goalPerDisplayedMonth[index]} days (${this.#calculateDayForGoal(goalPerDisplayedMonth[index])}) based on your ${Activity.getCalendarTitle().join(' ')} average.`))
