@@ -1,5 +1,7 @@
 # Dreaming Spanish Enhanced
 
+TamperMonkey scripts to enhance your Dreaming Spanish experience.
+
 ## Enhancements
 
 ### Progress Page
@@ -7,12 +9,14 @@
 1. Instead of just showing how many days you have until your next level, it now shows the expected date too.
 2. It shows how many days you have until the next level and expected date based on your overall daily average and the monthly average of the displayed month in the Calendar.
 
-## TODO/Bugs
+## Bugs
 
 ### Progress Page
 
-1. There's an intermittent issue where the data might show up on Firefox until you refresh the page or change the calendar.
+1. There's an intermittent issue where the data might not show up on Firefox until you refresh the page or change the calendar.
 2. When the page changes view (mobile <-> desktop), the additional info vanishes until the page is refreshed or you change the calendar.
+
+## TODO
 
 ### Video page
 
