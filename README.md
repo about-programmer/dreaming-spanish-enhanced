@@ -12,7 +12,7 @@
 ### Progress Page
 
 1. There's an intermittent issue where the data might show up on Firefox until you refresh the page or change the calendar.
-2. When the page changes view (mobile <-> desktop), the additional info vanishes until the page is refreshed.
+2. When the page changes view (mobile <-> desktop), the additional info vanishes until the page is refreshed or you change the calendar.
 
 ### Video page
 
